@@ -1,0 +1,1 @@
+# floggit-whiteboard-service
