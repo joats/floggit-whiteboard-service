@@ -45,4 +45,20 @@ publicAPI.getAll = () => {
   return notesArray;
 };
 
+publicAPI.update = (id,value) => {
+  const noteFromDb = notes[id];
+  console.dir(notes);
+  notes.forEach((note) => {
+    if(noteFromDb.id === note.id){
+      notes.pop(noteFromDb.id);
+      notes.push({
+        id,
+        value,
+      });
+    }
+  });
+  save();
+  return note;
+}
+
 module.exports = publicAPI;
