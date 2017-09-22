@@ -33,8 +33,7 @@ const update = (req, res) => {
   const id = req.params.id;
   const value = req.body.value;
   notes.update(id, value);
-  console.log(id, value);
-  res.status(200);
+  res.status(200).send();
 };
 
 module.exports = {
