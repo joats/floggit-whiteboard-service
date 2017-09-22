@@ -14,36 +14,42 @@ function save() {
 }
 
 const publicAPI = {};
-
-publicAPI.add = (value) => {
+//Add API
+publicAPI.add = (title, description, color) => {
   const guid = uuid();
   notes[guid] = {
-    value,
+    title,
+    description,
+    color,
   };
   save();
   return guid;
 };
-
+//Get API
 publicAPI.get = id => notes[id];
-
+//Remove API
 publicAPI.remove = (id) => {
   delete notes[id];
   save();
 };
-
+//Get All API
 publicAPI.getAll = () => {
   const notesArray = [];
   Object.keys(notes).forEach((id) => {
     notesArray.push({
       id,
-      value: notes[id].value,
+      title: notes[id].title,
+      description: notes[id].description,
+      color: notes[id].color,
     });
   });
   return notesArray;
 };
-
-publicAPI.update = (id, value) => {
-  notes[id].value = value;
+//Update API
+publicAPI.update = (note) => {
+  notes[note.id].title = note.title;
+  notes[note.id].description = note.description;
+  notes[note.id].color = note.color;
   save();
 }
 
