@@ -29,11 +29,17 @@ const add = (req, res) => {
 };
 
 // TODO create update/put
-const update = (req, res) => {};
+const update = (req, res) => {
+  const id = req.params.id;
+  const value = req.body.value;
+  notes.update(id, value);
+  res.status(200).send();
+};
 
 module.exports = {
   get,
   getAll,
   remove,
   add,
+  update,
 };

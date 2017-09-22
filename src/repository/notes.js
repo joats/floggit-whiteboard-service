@@ -42,4 +42,9 @@ publicAPI.getAll = () => {
   return notesArray;
 };
 
+publicAPI.update = (id, value) => {
+  notes[id].value = value;
+  save();
+}
+
 module.exports = publicAPI;
