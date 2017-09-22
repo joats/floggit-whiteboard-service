@@ -2,47 +2,55 @@
 // Also we use to illustrate how frontend code can be used on the backend.
 // In production you should use a proper data store i.e. mySql, redis, couchdb etc.
 const { LocalStorage } = require('node-localstorage');
+const uuid = require('uuid/v4');
 
 const localStorage = new LocalStorage('./scratch');
 
 const notes = (localStorage.getItem('noteList')) ?
   JSON.parse(localStorage.getItem('noteList')) : {};
 
-function generateId() {
-  return (+(new Date())).toString(); // Use a GUID generator instead of this
-}
-
 function save() {
   localStorage.setItem('noteList', JSON.stringify(notes));
 }
 
 const publicAPI = {};
-
-publicAPI.add = (value) => {
-  const uniqueId = generateId();
-  notes[uniqueId] = {
-    value,
+//Add API
+publicAPI.add = (title, description, color) => {
+  const guid = uuid();
+  notes[guid] = {
+    title,
+    description,
+    color,
   };
   save();
-  return uniqueId;
+  return guid;
 };
-
+//Get API
 publicAPI.get = id => notes[id];
-
+//Remove API
 publicAPI.remove = (id) => {
   delete notes[id];
   save();
 };
-
+//Get All API
 publicAPI.getAll = () => {
   const notesArray = [];
   Object.keys(notes).forEach((id) => {
     notesArray.push({
       id,
-      value: notes[id].value,
+      title: notes[id].title,
+      description: notes[id].description,
+      color: notes[id].color,
     });
   });
   return notesArray;
 };
+//Update API
+publicAPI.update = (note) => {
+  notes[note.id].title = note.title;
+  notes[note.id].description = note.description;
+  notes[note.id].color = note.color;
+  save();
+}
 
 module.exports = publicAPI;

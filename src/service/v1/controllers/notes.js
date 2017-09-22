@@ -1,5 +1,6 @@
 const notes = require('../../../repository/notes');
 
+//Get Rest
 const get = (req, res) => {
   const id = req.params.id;
   const note = notes.get(id);
@@ -11,29 +12,38 @@ const get = (req, res) => {
       message: `Note ${id} not found` });
   }
 };
-
+//Get All Rest
 const getAll = (req, res) => {
   res.json(notes.getAll());
 };
-
+//Remove Rest
 const remove = (req, res) => {
   const id = req.params.id;
   notes.remove(id);
   res.status(204).send();
 };
-
+//Add Rest
 const add = (req, res) => {
-  const note = req.body.value;
-  const id = notes.add(note);
+  const title = req.body.title;
+  const description = req.body.description;
+  const color = req.body.color;
+  const id = notes.add(title, description, color);
   res.status(201).json({ id });
 };
-
-// TODO create update/put
-const update = (req, res) => {};
+// Update Rest
+const update = (req, res) => {
+  const id = req.params.id;
+  const title = req.body.title;
+  const description = req.body.description;
+  const color = req.body.color;
+  notes.update({id, title, description, color});
+  res.status(202).send();
+};
 
 module.exports = {
   get,
   getAll,
   remove,
   add,
+  update,
 };
