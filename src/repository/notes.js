@@ -2,15 +2,12 @@
 // Also we use to illustrate how frontend code can be used on the backend.
 // In production you should use a proper data store i.e. mySql, redis, couchdb etc.
 const { LocalStorage } = require('node-localstorage');
+const uuid = require('uuid/v4');
 
 const localStorage = new LocalStorage('./scratch');
 
 const notes = (localStorage.getItem('noteList')) ?
   JSON.parse(localStorage.getItem('noteList')) : {};
-
-function generateId() {
-  return (+(new Date())).toString(); // Use a GUID generator instead of this
-}
 
 function save() {
   localStorage.setItem('noteList', JSON.stringify(notes));
@@ -19,12 +16,12 @@ function save() {
 const publicAPI = {};
 
 publicAPI.add = (value) => {
-  const uniqueId = generateId();
-  notes[uniqueId] = {
+  const guid = uuid();
+  notes[guid] = {
     value,
   };
   save();
-  return uniqueId;
+  return guid;
 };
 
 publicAPI.get = id => notes[id];
