@@ -14,7 +14,7 @@ function save() {
 }
 
 const publicAPI = {};
-//Add API
+// Add API
 publicAPI.add = (title, infoList, color) => {
   const guid = uuid();
   notes[guid] = {
@@ -25,14 +25,14 @@ publicAPI.add = (title, infoList, color) => {
   save();
   return guid;
 };
-//Get API
+// Get API
 publicAPI.get = id => notes[id];
-//Remove API
+// Remove API
 publicAPI.remove = (id) => {
   delete notes[id];
   save();
 };
-//Get All API
+// Get All API
 publicAPI.getAll = () => {
   const notesArray = [];
   Object.keys(notes).forEach((id) => {
@@ -45,12 +45,12 @@ publicAPI.getAll = () => {
   });
   return notesArray;
 };
-//Update API
+// Update API
 publicAPI.update = (note) => {
   notes[note.id].title = note.title;
   notes[note.id].infoList = note.infoList;
   notes[note.id].color = note.color;
   save();
-}
+};
 
 module.exports = publicAPI;
