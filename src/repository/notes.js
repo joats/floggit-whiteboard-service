@@ -15,11 +15,11 @@ function save() {
 
 const publicAPI = {};
 // Add API
-publicAPI.add = (title, description, color) => {
+publicAPI.add = (title, infoList, color) => {
   const guid = uuid();
   notes[guid] = {
     title,
-    description,
+    infoList,
     color,
   };
   save();
@@ -39,7 +39,7 @@ publicAPI.getAll = () => {
     notesArray.push({
       id,
       title: notes[id].title,
-      description: notes[id].description,
+      infoList: notes[id].infoList,
       color: notes[id].color,
     });
   });
@@ -48,7 +48,7 @@ publicAPI.getAll = () => {
 // Update API
 publicAPI.update = (note) => {
   notes[note.id].title = note.title;
-  notes[note.id].description = note.description;
+  notes[note.id].infoList = note.infoList;
   notes[note.id].color = note.color;
   save();
 };
