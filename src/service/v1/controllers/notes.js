@@ -25,18 +25,18 @@ const remove = (req, res) => {
 //Add Rest
 const add = (req, res) => {
   const title = req.body.title;
-  const description = req.body.description;
+  const infoList = req.body.infoList;
   const color = req.body.color;
-  const id = notes.add(title, description, color);
+  const id = notes.add(title, infoList, color);
   res.status(201).json({ id });
 };
 // Update Rest
 const update = (req, res) => {
   const id = req.params.id;
   const title = req.body.title;
-  const description = req.body.description;
+  const infoList = req.body.infoList;
   const color = req.body.color;
-  notes.update({id, title, description, color});
+  notes.update({id, title, infoList, color});
   res.status(202).send();
 };
 
