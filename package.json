@@ -7,7 +7,7 @@
     "js-lint": "node ./node_modules/eslint/bin/eslint.js '**/*.js'",
     "start": "NODE_ENV=production node .",
     "start:dev": "nodemon .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run js-lint"
   },
   "author": "Joakim Holmgren, Robert Savela, Daniel Kemter, Emelie Mirhagen, Johan Sjölander, Daniel Flores",
   "license": "ISC",
