@@ -25,6 +25,11 @@ publicAPI.add = (title, infoList, color) => {
   save();
   return guid;
 };
+
+
+
+
+
 // Get API
 publicAPI.get = id => notes[id];
 // Remove API
